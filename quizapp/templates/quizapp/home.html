@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Question</title>
+    <style>
+        .card {
+            margin: 0 auto;
+            /* Added */
+            float: none;
+            /* Added */
+            margin-bottom: 10px;
+            /* Added */
+        }
+
+        @media screen and (max-width: 980px) {
+            .w-50 {
+                width: 100% !important;
+                ;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card text-center w-50" style="margin-top: 20px;">
+        {% if msg %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{msg}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+        <div class="card-header">
+            <h1>Question No.:- {{question.id}}</h1>
+        </div>
+        <div class="card-body  text-center ">
+            <p>{{question.question}}</p>
+            {% if question.image %}
+                <img src='/media/{{question.image}}' height="300px" width="300px">
+            {% endif %}
+            {% if question.audio %}
+                <audio controls>
+                    <source src="/media/{{question.audio}}" type="audio/mpeg">
+                </audio>
+            {% endif %}
+            <form method="post"> {% csrf_token %}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-3 mr-1">
+                            <label for="answer">Answer</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="answer" name="answer" aria-describedby="emailHelp"
+                                placeholder="Enter your answer">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Answer</button>
+
+            </form>
+        </div>
+        <div class="card-footer text-muted">
+            <h5> Current Position:- 1 <a href="/quizapp/leaderboard">Go To Leaderboard</a></h5>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
